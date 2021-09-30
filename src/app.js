@@ -5,17 +5,17 @@ const mongoose = require('mongoose');
 const cors = require('cors')
 
 app.use(cors({origin: 'http://localhost:4000'}));
-
-const PORT = config.get('port')
-const HOST = config.get('host')
-const MONGO_DB = config.get('mongoUrl')
-const localhost = post => post ? `${HOST}${PORT}/${post}` : `${HOST}${PORT}`
-
 app.use(express.json())
 //app.use(express.urlencoded({extended: true}));
 
 
+const PORT = process.env.PORT || config.get('port')
+const HOST = config.get('host')
+const MONGO_DB = config.get('mongoUrl')
+const localhost = post => post ? `${HOST}${PORT}/${post}` : `${HOST}${PORT}`
+
 app.use('/api/auth', require('./routes/auth.routes'))
+app.use('/api/question', require('./routes/delete.question'))
 app.use('/api/question', require('./routes/get.question'))
 app.use('/api/question', require('./routes/get.topic'))
 app.use('/api/question', require('./routes/new.question'))
