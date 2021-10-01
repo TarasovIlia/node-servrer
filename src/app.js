@@ -4,10 +4,8 @@ const config = require('config');
 const mongoose = require('mongoose');
 const cors = require('cors')
 
-app.use(cors({origin: 'http://localhost:4000'}));
+app.use(cors());
 app.use(express.json())
-//app.use(express.urlencoded({extended: true}));
-
 
 const PORT = process.env.PORT || config.get('port')
 const HOST = config.get('host')
