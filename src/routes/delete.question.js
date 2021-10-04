@@ -3,7 +3,7 @@ const { findOne } = require('../../model/Question');
 const Question = require('../../model/Question')
 const router = Router();
 
-router.delete(
+router.post(
     '/delete', async (req,res) => {
     try {
         console.log(req.body)
