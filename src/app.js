@@ -18,6 +18,7 @@ app.use('/api/question', require('./routes/get.question'))
 app.use('/api/question', require('./routes/get.topic'))
 app.use('/api/question', require('./routes/new.question'))
 app.use('/api/question', require('./routes/new.topic'))
+app.use('/api/question', require('./routes/get.question.page'))
 
 
 async function start() {

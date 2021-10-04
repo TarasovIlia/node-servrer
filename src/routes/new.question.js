@@ -5,7 +5,6 @@ const router = Router();
 router.post(
     '/send', async (req,res) => {
     try {
-        console.log(req.body)
         const {question, topic} = req.body
         
         const sendNewMessage = new Question({ question: question,  topic: topic, resolved: false })
