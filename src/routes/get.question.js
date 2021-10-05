@@ -2,12 +2,13 @@ const {Router} = require('express');
 const Question = require('../../model/Question')
 const router = Router();
 
-
-router.get('/', async (res,req) => {
+router.get('/', async (req,res) => {
     try {
-        const allQuestion = await Question.find({})
-        req.json(allQuestion)
-
+        console.log(req.query.topic)
+        const newTopic = req.query.topic;
+        const allQuestion = await Question
+            .find(newTopic ? {topic:newTopic} : {})
+        res.json(allQuestion)
         res.status(201).json({ message: "Questions send"})
 
     } catch (err) {
