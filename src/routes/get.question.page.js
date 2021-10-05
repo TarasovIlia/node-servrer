@@ -4,12 +4,12 @@ const router = Router();
 
 router.get('/page', async (req,res) => {
     try {
-        const newLimit = parseInt(req.query.limit)
+        const newLimit = parseInt(req.query.limit);
+        const newTopic = req.query.topic;
         const limit = 11 * (newLimit || 1)
         const allQuestion = await Question
-            .find({})
+            .find(newTopic ? {topic:newTopic} : {})
             .limit(limit)
-
         res.json(allQuestion)
         res.status(201).json({ message: "Questions send"})
 
