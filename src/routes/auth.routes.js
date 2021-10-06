@@ -48,12 +48,13 @@ router.post(
 router.post(
     '/login',
     [
-        check('login', 'Enter valid email').normalizeEmail().isEmail(),
+        check('email', 'Enter valid email').normalizeEmail().isEmail(),
         check('password', 'Enter valid password').exists()
     ],
     async (req,res) => {
     try {
         const errors = validationResult(req)
+        console.log(req.body) 
 
         if (!errors.isEmpty()) {
             return res.status(400).json({
@@ -61,7 +62,6 @@ router.post(
                 message: "Invalid data"
             })
         }
-        console.log(req.body)
         const {email, password} = req.body
 
         const user = await User.findOne({ email })
@@ -76,16 +76,21 @@ router.post(
             return res.status(400).json({ message: 'password dismatch'})
         }
 
+        const admin = user.email === 'tarasav@mail.ru'
+
         const token = jwt.sign(
-            { userId: user.id },
+            {
+                email: user.email,
+                admin
+            },
             config.get('jwtSecret'),
             { expiresIn: '1h' }
         )
 
-        res.json({ token, userId })
+        res.json({ token, message: `Hello ${email}` })
         
     } catch (err) {
-        res.status(500).json({message: "error, try later"})
+        res.status(500).json({err : err.message, message: "error, try later"})
     }
 })
 
