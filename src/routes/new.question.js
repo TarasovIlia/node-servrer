@@ -8,7 +8,7 @@ router.post(
         const {question, topic} = req.body
         
         if(!question) {
-            return res.status(500).json({message: "pleace, enter the questions"})
+            return res.status(500).json({message: "pleace, enter the question"})
         }
         
         if(!topic) {

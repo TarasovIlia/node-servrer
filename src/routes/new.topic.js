@@ -16,7 +16,7 @@ router.post(
 
         await sendNewTopic.save()
 
-        res.status(201).json({ message: "Question send"})
+        res.status(201).json({ message: "Topic send"})
 
     } catch (err) {
         console.log(err.message)
