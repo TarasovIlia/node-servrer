@@ -13,7 +13,7 @@ router.post(
         
         await deleteQuestion.deleteOne()
 
-        res.status(201).json({ message: "Question send"})
+        res.status(201).json({ message: "Question deleted"})
 
     } catch (err) {
         console.log(err.message)
