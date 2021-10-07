@@ -8,15 +8,19 @@ router.post(
         console.log(req.body)
         const {topic, level} = req.body
         
+        if(!topic) {
+            return res.status(500).json({message: "pleace, enter the topic"})
+        }
+
         const sendNewTopic = new Topic({ topic: topic, level: level })
-        
+
         await sendNewTopic.save()
 
         res.status(201).json({ message: "Question send"})
 
     } catch (err) {
         console.log(err.message)
-        res.status(500).json({message: "ERROR ON SERVER"})
+        res.status(500).json({message: "server error, pleace, try later"})
     }
 })
 

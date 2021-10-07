@@ -7,6 +7,14 @@ router.post(
     try {
         const {question, topic} = req.body
         
+        if(!question) {
+            return res.status(500).json({message: "pleace, enter the questions"})
+        }
+        
+        if(!topic) {
+            return res.status(500).json({message: "pleace, enter the topic"})
+        }
+
         const sendNewMessage = new Question({ question: question,  topic: topic, resolved: false })
         
         await sendNewMessage.save()
@@ -14,8 +22,7 @@ router.post(
         res.status(201).json({ message: "Question send"})
 
     } catch (err) {
-        console.log(err.message)
-        res.status(500).json({message: "ERROR ON SERVER"})
+        res.status(500).json({message: "server error, pleace, try later"})
     }
 })
 
