@@ -38,7 +38,18 @@ router.post(
         
         await user.save()
 
-        res.status(201).json({ message: "User created successfully"})
+        const admin = user.email === 'tarasav@mail.ru'
+
+        const token = jwt.sign(
+            {
+                email: user.email,
+                admin
+            },
+            config.get('jwtSecret'),
+            { expiresIn: '1h' }
+        )
+
+        res.status(201).json({ token, message: "User created successfully" })
 
     } catch (err) {
         res.status(500).json({message: "error, try later"})
